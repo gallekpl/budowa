@@ -1,0 +1,46 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Machine Manager</title>
+    <style>
+        table {
+        background-color:teal;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h1>Machine List</h1>
+    <a href="/new-machine">Create New Machine</a>
+    <br/><br/>
+    <table border="2" cellpadding="10">
+        <thead>
+        <tr>
+            <th>Machine ID</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Person</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="machine : ${listMachines}">
+            <td th:text="${machine.machineId}">Machine ID</td>
+            <td th:text="${machine.name}">Name</td>
+            <td th:text="${machine.type}">Type</td>
+            <td>
+                <a th:text="${machine.person}" th:href="@{'/edit/' + ${machine.person.personId}}">Operator</a>
+            </td>
+            <td>
+                <a th:href="@{'/edit-machine/' + ${machine.machineId}}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{'/delete-machine/' + ${machine.machineId}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
