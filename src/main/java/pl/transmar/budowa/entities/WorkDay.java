@@ -3,11 +3,9 @@ package pl.transmar.budowa.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -18,9 +16,9 @@ import java.util.List;
 public class WorkDay {
     @Id
     @Column(name="Date")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    @OneToMany
-    @Column(name="Task")
+    @OneToMany(mappedBy = "workDay")
     private List<Task> tasks;
     @Column(name="HoursWorked")
     private int hoursWorked;
@@ -28,6 +26,11 @@ public class WorkDay {
     public WorkDay(Date date, int hoursWorked) {
         this.date = date;
         this.hoursWorked = hoursWorked;
+    }
+
+    @Override
+    public String toString() {
+        return getDate().toString();
     }
 }
 

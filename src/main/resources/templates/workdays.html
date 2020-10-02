@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>Work Days Manager</title>
+    <style>
+        table {
+        background-color:yellow;
+        padding: 10px;
+        border-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+<div align="center">
+    <h1>WorkDay List</h1>
+    <a href="/new-workday">Create New WorkDay</a>
+    <br/><br/>
+    <table border="1" cellpadding="4">
+        <thead>
+        <tr>
+            <th>Date</th>
+            <th>Hours worked</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="workDay : ${workDayList}">
+            <td th:text="${workDay.date}">Date</td>
+            <td th:text="${workDay.hoursWorked}">Hours Worked</td>
+            <td th:text="${workDay.tasks}">Tasks</td>
+
+            <td>
+                <a th:href="@{'/edit-workday/' + ${workDay.date}}">Edit</a>
+            </td>
+            <td>
+                <a th:href="@{'/delete-workday/' + ${workDay.date}}">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -23,6 +23,7 @@ public class Person {
     @Column(name="Role", nullable = false)
     private String role;
 
+
     public Person() {
     }
 

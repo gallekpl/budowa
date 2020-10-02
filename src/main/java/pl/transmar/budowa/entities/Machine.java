@@ -20,6 +20,7 @@ public class Machine {
     @Column(name = "Type", nullable = false)
     private MachineType type;
 
+
     public Machine() {
     }
 
@@ -64,6 +65,6 @@ public class Machine {
 
     @Override
     public String toString() {
-        return "Machine [id=" + machineId + ", Name=" + name + ", Type" + type.name() + "]";
+        return name;
     }
 }

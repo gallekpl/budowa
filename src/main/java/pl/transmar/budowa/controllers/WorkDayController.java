@@ -7,20 +7,17 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import pl.transmar.budowa.entities.Task;
+import pl.transmar.budowa.entities.WorkDay;
 import pl.transmar.budowa.repos.MachineRepository;
 import pl.transmar.budowa.repos.PersonRepository;
 import pl.transmar.budowa.repos.TaskRepository;
 import pl.transmar.budowa.repos.WorkDayRepository;
 
-import javax.validation.Valid;
-
 @Controller
-public class TaskController {
-    private static final Logger log = LoggerFactory.getLogger(TaskController.class);
+public class WorkDayController {
+    private static final Logger log = LoggerFactory.getLogger(WorkDayController.class);
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
@@ -30,40 +27,40 @@ public class TaskController {
     @Autowired
     private WorkDayRepository workDayRepository;
 
-    @GetMapping("/tasks") //getting list of all tasks
-    public String getTasks(Model model) {
+    @GetMapping("/workdays")
+    public String getWorkDays(Model model) {
         model.addAttribute("listTasks", taskRepository.findAll()); //
         model.addAttribute("personsToString", personRepository.findAll().toString());
         model.addAttribute("workDayList", workDayRepository.findAll());
-        return "tasks";
+        return "workdays";
 
     }
 
 
-    @RequestMapping("/new-task") //adding new Task
-    public String getAllTasks(Task task, Model model) {
+    @RequestMapping("/new-workday")
+    public String getAllWorkDays(WorkDay workDay, Model model) {
         model.addAttribute("personsList", personRepository.findAll());
         model.addAttribute("machinesList", machineRepository.findAll());
         model.addAttribute("workDayList", workDayRepository.findAll());
-        return "add-task";
+        return "add-workday";
     }
 
-    @PostMapping(value = "/tasks", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)  //saving new person
-    public String createTask(Task task, Model model) {
-        model.addAttribute("personsToString", personRepository.findAll().toString());
-        taskRepository.save(task);
-        return "redirect:/tasks/";
+    @PostMapping(value = "/workdays", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+    public String createWorkDay(WorkDay workDay, Model model) {
+        model.addAttribute("workDayList", workDayRepository.findAll());
+        workDayRepository.save(workDay);
+        return "redirect:/workdays/";
 
     }
-
-    @GetMapping("/edit-task/{id}")
+/*
+    @GetMapping("/edit-workday/{id}")
     public String getTask(@Valid @PathVariable long id, Model model){
         model.addAttribute("task", taskRepository.getOne(id));
         return "edit-task";
     }
 
 
-    @PostMapping("/tasks/{id}") //updating task
+    @PostMapping("/workdays/{id}") //updating task
     public String updateTask(@Valid @PathVariable long id, Task task) {
         Task taskToUpdate = taskRepository.getOne(id);
 
@@ -76,12 +73,14 @@ public class TaskController {
         return "redirect:/";
     }
 
-    @GetMapping("/delete-task/{id}") //deleting person
+    @GetMapping("/delete-workday/{id}") //deleting person
     public String deleteTask(@Valid @PathVariable long id) {
 
         taskRepository.deleteById(id);
         return "redirect:/";
     }
+
+ */
 
 
 

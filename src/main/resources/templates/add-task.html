@@ -33,7 +33,11 @@
         </tr>
         <tr>
             <td>Date:</td>
-            <td><input type="date" th:field="*{date}" /></td>
+            <td>
+                <select th:field="*{workDay.date}">
+                    <option th:each="wd : ${workDayList}" th:value="${wd.date}" th:text="${wd.date}"></option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td colspan="2"><button type="submit">Save</button> </td>

@@ -3,11 +3,9 @@ package pl.transmar.budowa.entities;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -19,23 +17,24 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="TaskID")
     private long taskId;
-    @Column(name="Machines")
     @OneToMany
+    @JoinColumn(name = "FKMachineID")
     private List<Machine> machines = new ArrayList<>();
-    @Column(name="Persons")
     @OneToMany
+    @JoinColumn(name = "FKPersonID")
     private List<Person> persons = new ArrayList<>();
     @Column(name="Description")
     private String description;
-    @Column(name="Date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date date;
+    @ManyToOne
+    @JoinColumn(name = "Date")
+    private WorkDay workDay;
 
-    public Task(List<Machine> machines, List<Person> persons, String description, @DateTimeFormat(pattern = "yyyy-MM-dd") Date date) {
+
+    public Task(List<Machine> machines, List<Person> persons, String description, WorkDay workDay){
         this.machines = machines;
         this.persons = persons;
         this.description = description;
-        this.date = date;
+        this.workDay = workDay;
     }
 
     @Override
