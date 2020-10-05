@@ -17,10 +17,10 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="TaskID")
     private long taskId;
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name = "FKMachineID")
     private List<Machine> machines = new ArrayList<>();
-    @OneToMany
+    @ManyToMany
     @JoinColumn(name = "FKPersonID")
     private List<Person> persons = new ArrayList<>();
     @Column(name="Description")
