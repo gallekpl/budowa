@@ -27,7 +27,7 @@
         </thead>
         <tbody>
         <tr th:each="workDay : ${workDayList}">
-            <td th:text="${workDay.date}">Date</td>
+            <td th:text="${#dates.format(workDay.date, 'dd-MMM-yyyy')}">Date</td>
             <td th:text="${workDay.hoursWorked}">Hours Worked</td>
             <td th:text="${workDay.tasks}">Tasks</td>
 

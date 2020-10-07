@@ -14,7 +14,7 @@
         <tr>
             <td>Machines:</td>
             <td>
-                <select th:field="*{machines}">
+                <select th:field="*{machines}" multiple>
                     <option th:each="machine : ${machinesList}" th:value="${machine.machineId}" th:text="${machine.name}"></option>
                 </select>
             </td>
@@ -35,7 +35,7 @@
             <td>Date:</td>
             <td>
                 <select th:field="*{workDay.date}">
-                    <option th:each="wd : ${workDayList}" th:value="${wd.date}" th:text="${wd.date}"></option>
+                    <option th:each="wd : ${workDayList}" th:value="${wd.date}" th:text="${#dates.format(wd.date, 'dd-MMM-yyyy')}"></option>
                 </select>
             </td>
         </tr>
