@@ -18,6 +18,11 @@ public class PersonController {
     @Autowired
     private PersonRepository personRepository;
 
+    @GetMapping("/login")
+    public String loginPage() {
+        return "login";
+    }
+
     @GetMapping("/")
     public String indexPage(Model model) {
         return "index";

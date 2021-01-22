@@ -40,6 +40,10 @@ public class TaskController {
     }
 
 
+    @GetMapping("/hours")
+    public String getHours() {
+        return "hours";
+    }
     @RequestMapping("/new-task") //adding new Task
     public String getAllTasks(Task task, Model model) {
         model.addAttribute("personsList", personRepository.findAll());
