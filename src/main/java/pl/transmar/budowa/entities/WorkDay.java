@@ -18,7 +18,7 @@ public class WorkDay {
     @Column(name="Date")
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
-    @OneToMany(mappedBy = "workDay")
+    @OneToMany(mappedBy = "workDay", cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Task> tasks;
     @Column(name="HoursWorked")
     private int hoursWorked;

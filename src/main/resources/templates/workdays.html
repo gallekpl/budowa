@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.thymeleaf.org ">
 <head>
     <meta charset="utf-8"/>
     <title>Work Days Manager</title>
@@ -10,6 +11,7 @@
         padding: 10px;
         border-radius: 20px;
         }
+
     </style>
 </head>
 <body>
@@ -35,7 +37,7 @@
                 <a th:href="@{'/edit-workday/' + ${workDay.date}}">Edit</a>
             </td>
             <td>
-                <a th:href="@{'/delete-workday/' + ${workDay.date}}">Delete</a>
+                <a th:href="@{'/delete-workday/' + ${#dates.format(workDay.date, 'dd-MM-yyyy')}}">Delete</a>
             </td>
         </tr>
         </tbody>
