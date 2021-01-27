@@ -45,8 +45,8 @@ public class WorkDayController {
 
     @RequestMapping("/new-workday") //adding new workday
     public String getAllWorkDays(WorkDay workDay, Model model) {
-        //model.addAttribute("personsList", personRepository.findAll());
-        //model.addAttribute("machinesList", machineRepository.findAll());
+        model.addAttribute("personsList", personRepository.findAll());
+        model.addAttribute("machinesList", machineRepository.findAll());
         model.addAttribute("workDayList", workDayRepository.findAll());
         return "add-workday";
     }
@@ -58,25 +58,22 @@ public class WorkDayController {
         return "redirect:/workdays/";
 
     }
-/*
-    @GetMapping("/edit-workday/{id}")
-    public String getTask(@Valid @PathVariable long id, Model model){
-        model.addAttribute("task", taskRepository.getOne(id));
-        return "edit-task";
+
+    @GetMapping("/edit-workday/{dateString}")
+    public String getWorkday(@Valid @PathVariable String dateString, Model model) throws ParseException {
+        model.addAttribute("workDay", workDayRepository.findByDate(new SimpleDateFormat("dd-MM-yyyy").parse(dateString)));
+        return "edit-workday";
     }
-*/
-
-    @PostMapping("/workdays/{id}") //updating workday
-    public String updateWorkday(@Valid @PathVariable long id, WorkDay workDay) {
-        WorkDay workdayToUpdate = workDayRepository.getOne(id);
-
-            workdayToUpdate.setDate(workDay.getDate());
-
-            workdayToUpdate.setHoursWorked(workDay.getHoursWorked());
 
 
+    @PostMapping("/workdays/{dateString}") //updating workday
+    public String updateWorkday(@Valid @PathVariable String dateString, WorkDay workDay) throws ParseException {
+        Date date =  new SimpleDateFormat("dd-MM-yyyy").parse(dateString);
+        WorkDay workdayToUpdate = workDayRepository.findByDate(date);
+        workdayToUpdate.setDate(workDay.getDate());
+        workdayToUpdate.setHoursWorked(workDay.getHoursWorked());
         workDayRepository.save(workdayToUpdate);
-        return "redirect:/";
+        return "redirect:/workdays/";
     }
 
     @GetMapping("/delete-workday/{dateString}") //deleting workday

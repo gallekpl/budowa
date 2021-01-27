@@ -11,7 +11,6 @@
         padding: 10px;
         border-radius: 20px;
         }
-
     </style>
 </head>
 <body>
@@ -23,18 +22,16 @@
         <thead>
         <tr>
             <th>Date</th>
-            <th>Hours worked</th>
-
+            <th>Hours Worked</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="workDay : ${workDayList}">
-            <td th:text="${#dates.format(workDay.date, 'dd-MMM-yyyy')}">Date</td>
+            <td th:text="${#dates.format(workDay.date, 'dd-MM-yyyy')}">Date</td>
             <td th:text="${workDay.hoursWorked}">Hours Worked</td>
             <td th:text="${workDay.tasks}">Tasks</td>
-
             <td>
-                <a th:href="@{'/edit-workday/' + ${workDay.date}}">Edit</a>
+                <a th:href="@{'/edit-workday/' + ${#dates.format(workDay.date, 'dd-MM-yyyy')}}">Edit</a>
             </td>
             <td>
                 <a th:href="@{'/delete-workday/' + ${#dates.format(workDay.date, 'dd-MM-yyyy')}}">Delete</a>
