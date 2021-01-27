@@ -33,7 +33,7 @@
             <td th:text="${task.machines}">Machines</td>
             <td th:text="${task.persons.toString()}">Persons</td>
             <td th:text="${task.description}">Description</td>
-            <td th:text="${#dates.format(task.workDay, 'dd-MMM-yyyy')}">Date</td>
+            <td th:text="${#dates.format(task.workDay, 'dd-MM-yyyy')}">Date</td>
 
             <td>
                 <a th:href="@{'/edit-task/' + ${task.taskId}}">Edit</a>

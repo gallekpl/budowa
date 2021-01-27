@@ -46,7 +46,7 @@ public class MachineController {
     @PostMapping(value = "/machines", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)  //save
     public String createMachine(Machine machine) {
         machineRepository.save(machine);
-        return "redirect:/";
+        return "redirect:/machines/";
     }
 
     @GetMapping("/edit-machine/{id}")

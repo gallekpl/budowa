@@ -63,6 +63,9 @@ public class TaskController {
     @GetMapping("/edit-task/{id}")
     public String getTask(@Valid @PathVariable long id, Model model){
         model.addAttribute("task", taskRepository.getOne(id));
+        model.addAttribute("personsList", personRepository.findAll());
+        model.addAttribute("machinesList", machineRepository.findAll());
+        model.addAttribute("workDayList", workDayRepository.findAll());
         return "edit-task";
     }
 
@@ -72,19 +75,19 @@ public class TaskController {
         Task taskToUpdate = taskRepository.getOne(id);
 
             taskToUpdate.setMachines(task.getMachines());
-
+            taskToUpdate.setPersons(task.getPersons());
             taskToUpdate.setDescription(task.getDescription());
 
 
         taskRepository.save(taskToUpdate);
-        return "redirect:/";
+        return "redirect:/tasks/";
     }
 
-    @GetMapping("/delete-task/{id}") //deleting person
+    @GetMapping("/delete-task/{id}") //deleting task
     public String deleteTask(@Valid @PathVariable long id) {
 
         taskRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/tasks/";
     }
 
 

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adding task</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<form action="#" th:action="@{'/tasks/' + ${task.taskId}}" th:object="${task}"
+      method="post">
+
+    <table border="0" cellpadding="10">
+        <tr>
+            <td>Description:</td>
+            <td><input type="text" th:field="*{description}" /></td>
+        </tr>
+        <tr>
+            <td>Machines:</td>
+            <td>
+                <select th:field="*{machines}" multiple>
+                    <option th:each="machine : ${machinesList}" th:value="${machine.machineId}" th:text="${machine.name}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Persons:</td>
+            <td>
+                <select th:field="*{persons}" multiple>
+                    <option th:each="person : ${personsList}" th:value="${person.personId}" th:text="${person.firstName} +' '+ ${person.lastName}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2"><button type="submit">Save</button> </td>
+        </tr>
+    </table>
+</form>
+
+</body>
+</html>

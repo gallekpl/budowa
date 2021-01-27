@@ -46,7 +46,7 @@ public class PersonController {
     @PostMapping(value = "/persons", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)  //saving new person
     public String createPerson(Person person) {
         personRepository.save(person);
-        return "redirect:/";
+        return "redirect:/persons/";
 
     }
 
@@ -75,14 +75,14 @@ public class PersonController {
             log.info("Role found.");
         }
         personRepository.save(personToUpdate);
-        return "redirect:/";
+        return "redirect:/persons/";
     }
 
     @GetMapping("/delete/{id}") //deleting person
     public String deletePerson(@Valid @PathVariable long id) {
 
         personRepository.deleteById(id);
-        return "redirect:/";
+        return "redirect:/persons/";
     }
 
 
