@@ -52,8 +52,7 @@ public class WorkDayController {
     }
 
     @PostMapping(value = "/workdays", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String createWorkDay(WorkDay workDay, Model model) {
-        model.addAttribute("workDayList", workDayRepository.findAll());
+    public String createWorkDay(WorkDay workDay) {
         workDayRepository.save(workDay);
         return "redirect:/workdays/";
 
@@ -70,6 +69,8 @@ public class WorkDayController {
     public String updateWorkday(@Valid @PathVariable String dateString, WorkDay workDay) throws ParseException {
         Date date =  new SimpleDateFormat("dd-MM-yyyy").parse(dateString);
         WorkDay workdayToUpdate = workDayRepository.findByDate(date);
+
+        workDayRepository.delete(workdayToUpdate);
         workdayToUpdate.setDate(workDay.getDate());
         workdayToUpdate.setHoursWorked(workDay.getHoursWorked());
         workDayRepository.save(workdayToUpdate);
