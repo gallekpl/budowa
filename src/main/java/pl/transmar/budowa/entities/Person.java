@@ -1,11 +1,17 @@
 package pl.transmar.budowa.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name="Persons")
 public class Person {
 
@@ -24,8 +30,6 @@ public class Person {
     private String role;
 
 
-    public Person() {
-    }
 
     public Person(String lastName, String firstName, String role) {
         this.lastName = lastName;
@@ -33,40 +37,10 @@ public class Person {
         this.role = role;
     }
 
-    public long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(long personId) {
-        this.personId = personId;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     @Override
     public String toString() {
         return firstName + " " + lastName;
     }
+
 }

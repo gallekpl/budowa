@@ -10,6 +10,7 @@ public enum MachineType {
     TRAKTOR,
     WOZIDLO,
     SIEWKA,
+    KOPARKO_LADOWARKA,
     RECYKLER;
 
 }

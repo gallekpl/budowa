@@ -2,9 +2,15 @@ package pl.transmar.budowa.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity(name = "Machines")
 public class Machine {
     @Id
@@ -21,46 +27,11 @@ public class Machine {
     private MachineType type;
 
 
-    public Machine() {
-    }
 
     public Machine(String name, MachineType type, Person person) {
         this.name = name;
         this.type = type;
         this.person = person;
-    }
-
-    public long getMachineId() {
-        return machineId;
-    }
-
-    public void setMachineId(long machineId) {
-        this.machineId = machineId;
-    }
-
-    public Person getPerson() {
-        return person;
-    }
-
-    public void setPerson(Person person) {
-        this.person = person;
-    }
-    
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public MachineType getType() {
-        return type;
-    }
-
-    public void setType(MachineType type) {
-        this.type = type;
     }
 
     @Override

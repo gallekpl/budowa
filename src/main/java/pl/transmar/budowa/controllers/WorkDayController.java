@@ -6,10 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import pl.transmar.budowa.entities.Person;
+import pl.transmar.budowa.entities.Task;
 import pl.transmar.budowa.entities.WorkDay;
 import pl.transmar.budowa.repos.MachineRepository;
 import pl.transmar.budowa.repos.PersonRepository;
@@ -20,6 +19,7 @@ import javax.validation.Valid;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class WorkDayController {
@@ -69,7 +69,6 @@ public class WorkDayController {
     public String updateWorkday(@Valid @PathVariable String dateString, WorkDay workDay) throws ParseException {
         Date date =  new SimpleDateFormat("dd-MM-yyyy").parse(dateString);
         WorkDay workdayToUpdate = workDayRepository.findByDate(date);
-
         workDayRepository.delete(workdayToUpdate);
         workdayToUpdate.setDate(workDay.getDate());
         workdayToUpdate.setHoursWorked(workDay.getHoursWorked());
@@ -83,6 +82,31 @@ public class WorkDayController {
         WorkDay workDayToDelete = workDayRepository.findByDate(date);
         workDayRepository.delete(workDayToDelete);
         return "redirect:/workdays/";
+    }
+
+
+
+    // for learning purposes
+    @GetMapping("/test/{person}")
+    public String test(@PathVariable String person, Model model, Model m2) {
+
+        List<Person> personToFind = personRepository.findByLastName(person);
+        List<Task> tasks = workDayRepository.findTasksWithSpecifiedPerson(personToFind.get(0));
+        model.addAttribute("person", personToFind.get(0));
+        String sum;
+
+        int size = tasks.size();
+        int i = 0;
+        int total = 0;
+        while (i < size) {
+            total = total + workDayRepository.totalHours(tasks.get(i));
+            i++;
+        }
+        sum = Integer.toString(total);
+        m2.addAttribute("sum", sum);
+        System.out.println(sum);
+
+        return "hours";
     }
 
 
