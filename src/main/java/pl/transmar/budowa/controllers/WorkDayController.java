@@ -87,7 +87,7 @@ public class WorkDayController {
 
 
     // for learning purposes
-    @GetMapping("/test/{person}")
+    @RequestMapping("/test/{person}")
     public String test(@PathVariable String person, Model model, Model m2) {
 
         List<Person> personToFind = personRepository.findByLastName(person);

@@ -12,5 +12,12 @@
     <a href="/tasks/">Tasks</a>
     <a href="/workdays/">Work Days</a>
 </div>
+<br><br><br>
+<div align="center">
+    <form action="#" th:action="@{/}" th:object="${searchDTO}"
+          method="post">
+        <input type="text" th:field="*{search}" value="Find person last name."/>
+    </form>
+</div>
 </body>
 </html>

@@ -26,11 +26,7 @@ public class PersonController {
         return "login";
     }
 
-    @GetMapping("/")
-    public String indexPage(Model model) {
-        return "index";
 
-    }
 
 
     @GetMapping("/persons") //getting list of all persons
