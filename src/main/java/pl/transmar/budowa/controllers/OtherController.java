@@ -35,4 +35,9 @@ public class OtherController {
         return "redirect:/test/"+searchDTO.getSearch();
     }
 
+    @GetMapping("/error")
+    public String errorSite(Model model) {
+        return "error";
+    }
+
 }
