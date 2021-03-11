@@ -6,4 +6,4 @@ Raporty dzienne (co i przez kogo było danego dnia robione oraz jakim sprzętem)
 Hibernate, SpringBoot, Spring MVC, REST, testowa baza danych w MsSQL w Azure.
 
 For testing purposes I put the webApp here:
-http://glkxxx.azurewebsites.net/
+http://budowa-env.eba-nqzcbqma.us-east-2.elasticbeanstalk.com/
